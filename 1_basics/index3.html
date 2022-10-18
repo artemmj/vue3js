@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue3js</title>
+</head>
+<body>
+<div id="app">
+    <p>Введите имя:
+        <input type="text" v-model="username" placeholder="Введите свое имя">
+    </p>
+    <p>Ваше имя: {{ username }}</p>
+    <hr>
+    <p>Программа расчета площади прямоугольника</p>
+    <p>Ширина: <input type="number" v-model="width" placeholder="Введите ширину" /></p>
+    <p>Высота: <input type="number" v-model="height" placeholder="Введите высоту" /></p>
+    <p>Площадь треугольника: {{ width * height }}</p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+const vueApp = Vue.createApp({
+    data() {
+        return {
+            username: '',
+            width: 0,
+            height: 0,
+        }
+    }
+}).mount('#app')
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue3js</title>
+</head>
+<body>
+
+<div id="app">
+  <input type="text" v-on:input="setMessage" /> <br>
+  <p v-once>{{ message }}</p>
+  {{ message }}
+  <hr>
+  {{ tom.name }} <br>
+  {{ tom.age }} <br>
+  {{ welcome() }} <br>
+  {{ displayUser() }} <br>
+  <a v-bind:href="html_el.link" v-bind:title="html_el.title">{{ html_el.text }}</a>
+  <br>
+  <a :href="html_el.link" :title="html_el.title">{{ html_el.text }}</a>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        message: 'hello again...',
+        tom: {name: 'Tom', age: 23},
+        html_el: {text: 'Google', title: 'google.com', link: 'https://google.com'}
+      }
+    },
+    methods: {
+      setMessage(event) {
+        this.message = event.target.value
+      },
+      welcome() {
+        return 'Welcome, ' + this.tom.name + '!'
+      },
+      displayUser() {
+        return 'User info: name ' + this.tom.name + ' age ' + this.tom.age
+      }
+    }
+  }).mount("#app");
+</script>
+</body>
+</html>
