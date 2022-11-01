@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вычисляемые свойства (computed properties)</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="name" />
+    <input type="number" v-model="age" />
+    <p>Имя: {{ name }}, возраст {{ age }}</p>
+    <p>{{ checkAge() }}</p>
+    <p>{{ enabled }}</p>
+    <hr>
+    <input type="text" v-model="firstName" />
+    <input type="text" v-model="lastName" />
+    <input type="text" v-model="fullName" />
+    <p>Полное имя: {{ fullName }}</p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+const vueApp = Vue.createApp({
+    data() {
+        return {
+            name: 'Tom',
+            age: 18,
+            firstName: 'Tomas',
+            lastName: 'Biden'
+        }
+    },
+    computed: {
+        enabled: function() {
+            console.log('computed')
+            if (this.age >= 18) {
+                return 'Доступ разрешен'
+            }
+            else {
+                return 'Доступ запрещен'
+            }
+        },
+        fullName: {
+            get: function() {
+                return this.firstName + ' ' + this.lastName
+            },
+            set: function(newName) {
+                const names = newName.split(' ')
+                this.firstName = names[0]
+                this.lastName = names[names.length - 1]
+            }
+        }
+    },
+    methods: {
+        checkAge: function() {
+            console.log('checkAge()')
+            if (this.age >= 18) {
+                return 'Доступ разрешен'
+            }
+            else {
+                return 'Доступ запрещен'
+            }
+        }
+    }
+}).mount('#app')
+</script>
+</body>
+</html>

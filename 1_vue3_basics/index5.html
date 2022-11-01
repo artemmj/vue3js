@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наблюдаемые свойства (watchers)</title>
+</head>
+<body>
+
+<div id="app">
+    <p>Введите возраст: <input v-model="age"/></p>
+    <p>{{ result }}</p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+const vueApp = Vue.createApp({
+    data() {
+        return {
+            age: 0,
+            result: ''
+        }
+    },
+    watch: {
+        age: function(newAge) {
+            if (newAge > 0 && newAge < 110) {
+                this.check(newAge)
+            }
+        },
+    },
+    methods: {
+        check: function(value) {
+            this.result = 'Пожалуйста, подождите, идет проверка...'
+            const vm = this
+            setTimeout(function() {
+                if (value >= 18) {
+                    vm.result = 'Доступ открыт'
+                }
+                else {
+                    vm.result = 'Для возраста ' + vm.age + ' доступ закрыт!'
+                }
+            }, 1000)
+        }
+    }
+}).mount('#app')
+</script>
+</body>
+</html>

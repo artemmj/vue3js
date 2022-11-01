@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Привязка к стилям</title>
+
+<style>
+</style>
+</head>
+<body>
+
+<div id="app">
+    <div class="region" v-bind:style="[colorStyle, sizeStyle]"></div>
+    <br><br>
+    <input type="text" v-model="color" />
+    <br><br>
+    <input type="number" v-model="width" />
+    <br><br>
+    <input type="number" v-model="height" />
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+const vueApp = Vue.createApp({
+    data() {
+        return {
+            color: 'red',
+            width: 75,
+            height: 75
+        }
+    },
+    computed: {
+        colorStyle() {
+            return {
+                'background-color': this.color
+            }
+        },
+        sizeStyle() {
+            return {
+                height: this.height + 'px', 
+                width: this.width + 'px'
+            }
+        }
+    }
+}).mount('#app')
+</script>
+</body>
+</html>

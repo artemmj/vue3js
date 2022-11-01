@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Привязка классов CSS</title>
+
+    <style>
+    .region{
+        background-color: #999;
+        margin: 10px;
+        width: 75px;
+        height: 75px;
+    }
+    .active{
+        background-color: red;
+    }
+    .bounded{
+        border: 2px solid black;
+    }
+    .yellow{ 
+        background-color: yellow; 
+    }
+    .red{ 
+        background-color: red; 
+    }
+    .blue{ 
+        background-color: blue; 
+    }
+    .green{ 
+        background-color: green; 
+    }
+    .big{
+        width: 100px;
+        height: 100px;
+    }
+    .small{
+        width: 50px;
+        height: 50px;
+    }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div class="region" v-bind:class="[color, {bounded: isBounded}, size]" v-on:click="isBounded = !isBounded"></div>
+    <br>
+    <button @click="isActive=!isActive">Toggle Active</button>
+    <br>
+    <button @click="isBounded=!isBounded">Toggle Border</button>
+    <br>
+    <input type="text" v-model="color" />
+    <br>
+    <input type="text" v-model="size" />
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+const vueApp = Vue.createApp({
+    data() {
+        return {
+            isActive: false,
+            isBounded: false,
+            color: "red",
+            size: "small"
+        }
+    }
+}).mount('#app')
+</script>
+</body>
+</html>
