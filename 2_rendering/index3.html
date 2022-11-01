@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление массивами</title>
+</head>
+<body>
+
+<div id="app">
+    <p>
+        <input type="text" v-model="newPhone" />
+        <button v-on:click="phones.push(newPhone)">Добавить новый телефон</button>
+    </p>
+    <ul>
+        <li v-for="(phone, index) in phones">
+            <p>{{ phone }} <button v-on:click="phones.splice(index, 1)">Удалить телефон</button></p>
+        </li>
+    </ul>
+    <hr>
+    <input type="number" v-model="start"/>
+    <input type="number" v-model="end"/>
+    <ul>
+        <li v-for="phone in visibleList"><p>{{ phone }}</p></li>
+    </ul>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+Vue.createApp({
+    data() {
+        return {
+            newPhone: '',
+            start: 1,
+            end: 1,
+            phones: ['iPhone 12', 'Galaxy S20', 'Nokia N9', 'Xiaomi Mi10']
+        }
+    },
+    computed: {
+        visibleList() {
+            return this.phones.slice(this.start - 1, this.end)
+        }
+    }
+}).mount('#app');
+</script>
+</body>
+</html>

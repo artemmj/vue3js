@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильтрация и сортировка массива</title>
+</head>
+<body>
+
+<div id="app">
+    <p><input type="text" v-model="company" /></p>
+    <ul>
+        <li v-for="phone in filteredList">
+            <p>{{ phone.title }} -- {{ phone.company }}</p>
+        </li>
+    </ul>
+    <hr>
+    <table>
+        <tr>
+            <td><a @click="sortParam='title'">Модель</a></td>
+            <td><a @click="sortParam='company'">Компания</a></td>
+            <td><a @click="sortParam='price'">Цена</a></td>
+        </tr>
+        <tr v-for="phone in sortedList">
+            <td>{{ phone.title }}</td>
+            <td>{{ phone.company }}</td>
+            <td>{{ phone.price }}</td>
+        </tr>
+    </table>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+Vue.createApp({
+    data() {
+        return {
+            sortParam: '',
+            company: '',
+            phones: [
+                {title:'iPhone 12', company:'Apple', price: 65000},
+                {title:'Galaxy S20', company:'Samsung', price: 63000},
+                {title:'Galaxy A10', company:'Samsung', price: 38000},
+                {title:'iPhone 10', company:'Apple', price: 45000},
+                {title:'Xiaomi Redmi 8', company:'Xiaomi', price: 42000}
+            ]
+        }
+    },
+    computed: {
+        filteredList() {
+            let comp = this.company
+            return this.phones.filter(function (elem) {
+                if (comp === '') return true
+                else return elem.company.indexOf(comp) > -1
+            })
+        },
+        sortedList() {
+            switch (this.sortParam) {
+                case 'title': return this.phones.sort(sortByTitle);
+                case 'company': return this.phones.sort(sortByCompany);
+                case 'price': return this.phones.sort(sortByPrice);
+                default: return this.phones;
+            }
+        }
+    }
+}).mount('#app');
+
+const sortByTitle = (d1, d2) => (d1.title.toLowerCase() > d2.title.toLowerCase()) ? 1 : -1;
+const sortByCompany = (d1, d2) => (d1.company.toLowerCase() > d2.company.toLowerCase()) ? 1 : -1;
+const sortByPrice = (d1, d2) =>(d1.price > d2.price) ? 1 : -1;
+
+</script>
+</body>
+</html>

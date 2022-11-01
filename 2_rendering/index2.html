@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вывод массивов и директива v-for</title>
+</head>
+<body>
+
+<div id="app">
+    <ul>
+        <li v-for="(user, index) in users">{{ index + 1 }}: {{ user.name }}, возраст {{ user.age }}</li>
+    </ul>
+    <ul>
+        <li v-for="user in users">
+            <p v-for="(value, key) in user">key: {{ key }}, value: {{ value }}</p>
+        </li>
+    </ul>
+    <hr>
+    <div>
+        <span v-for="n in 10">{{ n }}  </span>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+Vue.createApp({
+    data() {
+        return {
+            users: [
+                {name: 'Tom', age: 123},
+                {name: 'Sam', age: 321},
+                {name: 'Alice', age: 111},
+                {name: 'Kate', age: 0}
+            ]
+        }
+    }
+}).mount('#app');
+</script>
+</body>
+</html>
