@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Элементы input и textarea</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div id="app" class="col-md-4">
+    <input type="checkbox" v-model="light" true-value="on" false-value="off" />
+    <span v-if="light==='on'">Выключить</span>
+    <span v-else>Включить</span>
+    <hr>
+    <input type="checkbox" value="Tom" v-model="selectedUsers">
+    <label>Tom</label><br>
+    <input type="checkbox" value="Bob" v-model="selectedUsers">
+    <label>Bob</label><br>
+    <input type="checkbox" value="Sam" v-model="selectedUsers">
+    <label>Sam</label><br>
+    <input type="checkbox" value="Alice" v-model="selectedUsers">
+    <label>Alice</label><br>
+    <span>Выбрано: {{selectedUsers}}</span>
+    <hr>
+    <template v-for="user in users">
+        <input type="checkbox" v-bind:value="user" v-model="selectedUsers">
+        <label>{{user.name}}</label><br>
+    </template>
+    <ul>
+        <li v-for="user in selectedUsers">{{user.name}} - {{user.age}}</li>
+    </ul>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+Vue.createApp({
+    data() {
+        return {
+            light: true,
+            users:[
+                {name:'Tom', age:22},
+                {name:'Bob', age:25},
+                {name:'Sam', age:28},
+                {name:'Alice', age:26}
+            ],
+            selectedUsers: []
+        }
+    }
+}).mount('#app');
+</script>
+</body>
+</html>
